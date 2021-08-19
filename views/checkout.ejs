@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <!-- font awesome -->
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<!-- fonts from equipments -->
+<script src="/js/jquery-2.2.4.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/csss/registration_css/style.css">
+<link rel="stylesheet" href="/csss/fonts/material-icon/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="/csss/custom.css">
+<link rel="stylesheet" href="/csss/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://js.stripe.com/v3"></script>
+<script src="https://checkout.stripe.com/checkout.js" defer></script>
+</head>
+<body>
+    <!-- navbar -->
+<nav class="navbar">
+    <div class="navbar-center">
+        <span class="nav-icon">
+            <i class="fas fa-bars"></i>
+        </span>
+        <p> <span class="comfy">Comfy</span> <span class="house">House</span> </p>
+        <!-- <img src="./images/logo.svg" alt="storen logo"> -->
+        <div class="cart-btn">
+            <span class="nav-icon">
+                <i class="fas fa-cart-plus"></i>
+                <div class="cart-items">0</div>
+            </span>
+        </div>
+    </div>
+</nav>
+    <!-- end navbar -->
+        <!-- end navbar -->
+<div class="container">
+    <div class="col-md-6 ">
+        <div class="card">
+            <div class="company-registration">
+                <span>Checkout</span>
+            </div>
+            <div class="card-body"> 
+                <input name="token" id="token" type="hidden" value="<%= stripePublicKey %>" />
+                <div class="col-md-6">		
+                    <label class="control-label required">First Name</label>
+                        <input name="customer_name" id="customer_name" type="text"  />
+                </div>
+                <div class="col-md-6">		
+                    <label class="control-label required">Last Name</label>
+                        <input name="customer_surname" id="customer_surname" type="text"  />
+                </div>
+                <div class="col-md-12">		
+                    <label class="control-label required">Email</label>
+                        <input name="customer_email" id="customer_email" type="text"  />
+                </div>
+                <div class="col-md-12">		
+                    <label class="control-label required">Phone Number</label>
+                        <input name="phone_number" id="phone_number" type="number"  />
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group label-floating">
+                        <label class="control-label required">Delivery</label>
+                            <div class="form-select">
+                                <select name="delivery" id="delivery">
+                                    <option value="">Choose Delivery ...</option>
+                                    <option value="Incuded">Incuded</option>
+                                    <option value="Excluded">Excluded</option>
+                                    <option value=""></option>
+                                </select>
+                                <span class="select-icon"><i class="zmdi zmdi-chevron-down"></i></span>
+                            </div>
+                    </div>
+                </div>
+                <div class=" col-md-12" id="warning" style="display:none">
+                    <div class=" col-md-12">
+                        <label class="control-label required">Get Your Location</label>
+                        <input type="button" onclick="getLocation()"  
+                                value="Click here to retrieve your current location coordinates"/>
+                    </div>
+                    <div class="col-md-6">		
+                        <label class="control-label required">Latitude</label>
+                            <input name="address_latitude" id="address_latitude" type="text" style="color:green" readonly />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label required">Longitude</label>
+                            <input name="address_longitude" id="address_longitude" type="text" style="color:green" readonly/>
+                    </div>
+                    <div class=" col-sm-12">
+                        <div class="form-group label-floating">
+                            <p id="demo"></p>
+                        </div>
+                    </div>         
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="card">
+            <div class="col-md-12">
+                <div class="row row-header">
+                    <div class="col-md-3">
+                        <p class="checkout-card"><strong></small>image</small></strong></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="checkout-card"><strong></small>product</small></strong></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p class="checkout-card"><strong></small>Price</small></strong></p>
+                    </div>
+                    <div class="col-md-3">
+                        <p class="checkout-card"><strong></small>Total Price</small></strong></p>
+                    </div>
+                    <div class="col-md-1">
+                        <p class="checkout-card-items"><strong></small>Quantity</small></strong></p>
+                    </div>
+                </div>
+                    <div class="payment-container">
+            
+                    </div> 
+            </div>               
+            <div class="col-lg-12">
+                <div class="row ">
+                    <div class="col-lg subtotal"><span class="total_items">Total Items</span></div>
+                    <div class="col-lg"></div>
+                    <div class="col-lg subtotal_price"><span class="total_items_number">0</span></div>
+                </div> 
+                <div class="row reciept_raw">
+                    <div class="col-lg subtotal"><span class="subtotal">Subtotal</span></div>
+                    <div class="col-lg"></div>
+                    <div class="col-lg subtotal_price">R<span class="subtotal_price_spn">0</span></div>
+                </div>
+                <div class="row reciept_raw">
+                    <div class="col-lg subtotal"><span class="subtotal">Tax(10%)</span></div>
+                    <div class="col-lg"></div>
+                    <div class="col-lg subtotal_price">R<span  class="taxtotal_price_spn">0</span></div>
+                </div>
+                <div class="row reciept_raw">
+                    <div class="col-lg total"><span class="total">Total</span></div>
+                    <div class="col-lg"></div>
+                    <div class="col-lg total_price">R<span  class="total_price_spn">0</span></div>
+                </div>                
+            </div>
+        </div>
+        <div class="form-submit">
+            <input type="submit" value="Continue Shopping" class="submit continue" name="reset" id="reset" />
+            <input type="submit" value="Complete Payment" class="submit" name="submit" id="submit" />
+        </div>
+</div>
+<script>
+    $(function() {
+        $('#delivery').change(function(){
+            if ($(this).val() == "Incuded") {
+                $('#warning').show();
+            } else {
+                $('#warning').hide();
+            }
+        });
+    });
+</script>
+<script src="/js/process_order.js" defer></script>
+<script src="/js/location_coordinates.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

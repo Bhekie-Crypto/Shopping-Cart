@@ -1,0 +1,44 @@
+{
+"items": [
+{
+    "sys": {"id": "1"},
+    "fields": {
+        "title": "three quoter bed",
+        "price": "10.99",
+        "image": { "fields": { "file": { "url": "./images/product-6.jpg"}}}
+    }
+},
+{
+    "sys": {"id": "2"},
+    "fields": {
+        "title": "queen panel bed",
+        "price": "12.99",
+        "image": { "fields": { "file": { "url": "./images/product-2.jpeg"}}}
+    }
+},
+{
+    "sys": {"id": "3"},
+    "fields": {
+        "title": "queen panel bed",
+        "price": "20.99",
+        "image": { "fields": { "file": { "url": "./images/product-3.jpeg"}}}
+    }
+},
+{
+    "sys": {"id": "4"},
+    "fields": {
+        "title": "cosmetic starage wadrabe",
+        "price": "40.99",
+        "image": { "fields": { "file": { "url": "./images/product-4.jpeg"}}}
+    }
+},
+{
+    "sys": {"id": "5"},
+    "fields": {
+        "title": "kist starages",
+        "price": "50.99",
+        "image": { "fields": { "file": { "url": "./images/product-5.jpeg"}}}
+    }
+}
+]
+}
